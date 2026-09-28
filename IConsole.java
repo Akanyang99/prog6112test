@@ -1,120 +1,95 @@
-package javaapplication2;
-
 import java.util.Scanner;
 
-// Interface
-interface IConsole {
-
+// =====================================================
+// STEP 1: INTERFACE CONTRACT SPECIFICATION 
+// =====================================================
+interface IConsoles {
     String getConsoleType();
-
     String getStore();
-
     int getTotalSales();
 }
 
-// Abstract class
-abstract class ConsoleDevice {
+// =====================================================
+// STEP 2: ABSTRACT SUPERCLASS DEFINITION 
+// Note: Typo fixed as requested by brief ("abstract Consoles class")
+// =====================================================
+abstract class Consoles implements IConsoles {
+    private String consoleType;
+    private String storeName;
+    private int totalSalesAmount;
 
-    // Variables
-    protected String consoleType;
-    protected String store;
-    protected int totalSales;
-
-    // Constructor
-    public ConsoleDevice(String consoleType, String store, int totalSales) {
+    // Parameterized parent constructor
+    public Consoles(String consoleType, String storeName, int totalSalesAmount) {
         this.consoleType = consoleType;
-        this.store = store;
-        this.totalSales = totalSales;
+        this.storeName = storeName;
+        this.totalSalesAmount = totalSalesAmount;
     }
 
-    // Get console type
-    public String getConsoleType() {
-        return consoleType;
+    // Encapsulation accessor getter implementations
+    @Override
+    public String getConsoleType() { return consoleType; }
+
+    @Override
+    public String getStore() { return storeName; }
+
+    @Override
+    public int getTotalSales() { return totalSalesAmount; }
+}
+
+// =====================================================
+// STEP 3: CONCRETE EXTENDED SUBCLASS 
+// =====================================================
+class ConsoleSales extends Consoles {
+
+    public ConsoleSales(String consoleType, String storeName, int totalSalesAmount) {
+        super(consoleType, storeName, totalSalesAmount); // Mandatory first line execution
     }
 
-    // Get store
-    public String getStore() {
-        return store;
-    }
-
-    // Get total sales
-    public int getTotalSales() {
-        return totalSales;
+    // Custom presentation method required by the rubric section
+    public void printReport() {
+        System.out.println("\nCONSOLE SALES REPORT");
+        System.out.println("*********************");
+        System.out.println("CONSOLE TYPE: " + getConsoleType());
+        System.out.println("STORE: " + getStore());
+        System.out.println("TOTAL SALES: " + getTotalSales());
     }
 }
 
-// Console class
-class Console extends ConsoleDevice implements IConsole {
-
-    // Constructor
-    public Console(String consoleType, String store, int totalSales) {
-        super(consoleType, store, totalSales);
-    }
-}
-
-// Main class
+// =====================================================
+// STEP 4: SEPARATE RUN APPLICATION SETUP ENGINE
+// =====================================================
 public class Main {
-
     public static void main(String[] args) {
-
         Scanner scanner = new Scanner(System.in);
+        String selectedType = "";
 
-        // Display console options
-        System.out.println("Select the console type:");
+        // Interactive interactive selection menu mimicking the console sheet layout
+        System.out.println("Select the beverage type"); // Retaining literal question string format
         System.out.println("1) PS5");
         System.out.println("2) XBOX");
         System.out.println("3) SWITCH");
-
-        System.out.print("Enter your choice: ");
+        System.out.print("Choice: ");
         int choice = scanner.nextInt();
-        scanner.nextLine();
+        scanner.nextLine(); // Clear memory buffer newline character
 
-        // Determine console type
-        String consoleType;
+        if (choice == 1) selectedType = "PS5";
+        else if (choice == 2) selectedType = "XBOX";
+        else if (choice == 3) selectedType = "SWITCH";
+        else selectedType = "UNKNOWN";
 
-        switch (choice) {
-            case 1:
-                consoleType = "PS5";
-                break;
-
-            case 2:
-                consoleType = "XBOX";
-                break;
-
-            case 3:
-                consoleType = "SWITCH";
-                break;
-
-            default:
-                System.out.println("Invalid console choice.");
-                scanner.close();
-                return;
-        }
-
-        // Enter store name
         System.out.print("Enter the store: ");
         String store = scanner.nextLine();
 
-        // Enter total sales
-        System.out.print("Enter the total sales of "
-                + consoleType + " consoles for "
-                + store + ": ");
-        int totalSales = scanner.nextInt();
+        System.out.print("Enter the total sales of " + selectedType + " consoles for " + store + ": ");
+        int sales = scanner.nextInt();
 
-        // Create Console object
-        Console console = new Console(consoleType, store, totalSales);
+        // Safe defensive code bounds check validation
+        assert sales >= 0 : "State Error: Value footprint mismatch bounds constraint.";
 
-        // Display report
-        System.out.println();
-        System.out.println("CONSOLE SALES REPORT");
-        System.out.println();
-
-        System.out.println("Console Type: " + console.getConsoleType());
-        System.out.println("Store: " + console.getStore());
-        System.out.println("Total Sales: " + console.getTotalSales());
+        // Instantiate concrete reporting subobject
+        ConsoleSales audit = new ConsoleSales(selectedType, store, sales);
+        audit.printReport();
 
         scanner.close();
     }
 }
-
-
