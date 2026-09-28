@@ -1,17 +1,15 @@
 import java.util.Scanner;
 
-// =====================================================
-// STEP 1: INTERFACE CONTRACT SPECIFICATION 
-// =====================================================
+// INTERFACE CONTRACT SPECIFICATION 
 interface IConsoles {
     String getConsoleType();
     String getStore();
     int getTotalSales();
 }
 
-// =====================================================
-// STEP 2: ABSTRACT SUPERCLASS DEFINITION 
-// =====================================================
+
+// ABSTRACT SUPERCLASS DEFINITION 
+
 abstract class Consoles implements IConsoles {
     private String consoleType;
     private String storeName;
@@ -35,16 +33,14 @@ abstract class Consoles implements IConsoles {
     public int getTotalSales() { return totalSalesAmount; }
 }
 
-// =====================================================
-// STEP 3: CONCRETE EXTENDED SUBCLASS 
-// =====================================================
+
 class ConsoleSales extends Consoles {
 
     public ConsoleSales(String consoleType, String storeName, int totalSalesAmount) {
         super(consoleType, storeName, totalSalesAmount); // Mandatory first line execution
     }
 
-    // Custom presentation method required by the rubric section
+    // Custom presentation method 
     public void printReport() {
         System.out.println("\nCONSOLE SALES REPORT");
         System.out.println("*********************");
@@ -54,15 +50,13 @@ class ConsoleSales extends Consoles {
     }
 }
 
-// =====================================================
-// STEP 4: SEPARATE RUN APPLICATION SETUP ENGINE
-// =====================================================
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String selectedType = "";
 
-        // Interactive interactive selection menu mimicking the console sheet layout
+        // Interactive selection menu 
         System.out.println("Select the beverage type"); // Retaining literal question string format
         System.out.println("1) PS5");
         System.out.println("2) XBOX");
@@ -85,7 +79,7 @@ public class Main {
         // Safe defensive code bounds check validation
         assert sales >= 0 : "State Error: Value footprint mismatch bounds constraint.";
 
-        // Instantiate concrete reporting subobject
+        // Instantiate concrete reporting subject
         ConsoleSales audit = new ConsoleSales(selectedType, store, sales);
         audit.printReport();
 
