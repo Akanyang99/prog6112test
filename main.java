@@ -16,13 +16,12 @@ public class Main {
         String topPerformingCity = "";
         int[] computedTotals = new int[cities.length];
 
-        // Print header layout matching sample screenshot formatting
+        // Print header 
         System.out.println("-----------------------------------------------------------------");
         System.out.println("GAMING CONSOLE REPORT");
         System.out.println("-----------------------------------------------------------------");
         System.out.printf("%-20s%-15s%-15s%-15s%n", "", "PS5", "XBOX", "SWITCH");
 
-        // Traverse the multidimensional array plane
         for (int i = 0; i < cities.length; i++) {
             System.out.printf("%-20s%-15d%-15d%-15d%n", 
                     cities[i], salesMatrix[i][0], salesMatrix[i][1], salesMatrix[i][2]);
