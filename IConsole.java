@@ -11,7 +11,6 @@ interface IConsoles {
 
 // =====================================================
 // STEP 2: ABSTRACT SUPERCLASS DEFINITION 
-// Note: Typo fixed as requested by brief ("abstract Consoles class")
 // =====================================================
 abstract class Consoles implements IConsoles {
     private String consoleType;
